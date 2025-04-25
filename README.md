@@ -1,54 +1,127 @@
-# React + TypeScript + Vite
+# Project Documentation
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Overview
 
-Currently, two official plugins are available:
+This project follows **Clean Architecture** principles to maintain a modular and scalable structure. We separate concerns by organizing the application into different layers: **components**, **hooks**, **pages**, **services**, and **utils**. 
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Folder Structure
 
-## Expanding the ESLint configuration
+```plaintext
+src/
+├── components/          # Global UI components used across the app
+│   └── LeaderBoard/
+│       ├── LeaderBoardComponent.tsx
+│       └── LeaderBoard.css
+├── hooks/               # Reusable hooks for business logic
+│   └── useLeaderboard.ts
+├── pages/               # Views of the app (e.g., Dashboard, Profile)
+│   └── HomePage.tsx
+│   └── ProfilePage.tsx
+├── services/            # Observables for API requests and responses
+│   └── leaderboardService.ts
+├── utils/               # Helper utilities and functions
+│   └── formatDate.ts
+└── assets/              # Static assets like images
+    └── pez.png
+    └── pescador.png
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+# Project Documentation
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## Components Folder
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+The `components` folder contains global UI components that are used across different views. These components are **pure** UI elements that do not contain business logic.
+
+### Example: `LeaderBoardComponent.tsx`
+
+```tsx
+import React from 'react';
+import './LeaderBoard.css';
+
+const LeaderBoardComponent = () => {
+  return (
+    <div className="leaderboard">
+      <h1>Leaderboard</h1>
+      {/* Render leaderboard content */}
+    </div>
+  );
+};
+
+export default LeaderBoardComponent;
 ```
+## Hooks Folder
+
+The `hooks` folder contains custom hooks that handle reusable business logic for different parts of the application.
+
+### Example: useLeaderboard.ts
+
+```ts
+import { useState, useEffect } from 'react';
+import leaderboardService from '@services/leaderboardService';
+
+const useLeaderboard = () => {
+  const [players, setPlayers] = useState([]);
+
+  useEffect(() => {
+    const sub = leaderboardService.subscribe((newPlayers) => {
+      setPlayers(newPlayers);
+    });
+    return () => {
+      sub.unsubscribe();
+    };
+  }, []);
+
+  return players;
+};
+
+export default useLeaderboard;
+```
+## Pages Folder
+
+The `pages` folder contains the actual pages of the application, which represent different views the user can navigate to. Each page will import relevant components and hooks to display content.
+
+### Example: HomePage.tsx
+
+```tsx
+import React from 'react';
+import LeaderBoardComponent from '@components/LeaderBoard/LeaderBoardComponent';
+import useLeaderboard from '@hooks/useLeaderboard';
+
+const HomePage = () => {
+  const players = useLeaderboard();
+
+  return (
+    <div>
+      <h1>Home Page</h1>
+      <LeaderBoardComponent />
+      {/* Render players */}
+    </div>
+  );
+};
+
+export default HomePage;
+
+```
+
+## Services Folder
+
+The `services` folder contains all the logic related to making API requests, typically using Observables to handle asynchronous data streams.
+
+### Example: leaderboardService.ts
+
+```ts
+import { Observable, of } from 'rxjs';
+
+const leaderboardService = new Observable((observer) => {
+  // Simulate API call
+  const players = [
+    { name: 'Player 1', score: 100 },
+    { name: 'Player 2', score: 90 },
+  ];
+  observer.next(players);
+  observer.complete();
+});
+
+export default leaderboardService;
+
