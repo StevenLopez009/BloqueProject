@@ -4,3 +4,10 @@
   background-image: url("../assets/fondo.webp");
   background-size: cover;
 }
+
+.home__buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1rem;
+}

@@ -6,8 +6,7 @@ const Home: React.FC = () => {
   return (
     <div className='home'>
       <LeaderBoardComponent/>
-      <div>
-        <button>REFRESH</button>
+      <div className='home__buttons'>
         <Link to="/market" >
           <button>MARKET</button>
         </Link>

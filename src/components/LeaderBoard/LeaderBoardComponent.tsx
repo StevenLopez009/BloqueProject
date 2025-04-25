@@ -1,9 +1,8 @@
 import fish from "@assets/pez.png";
 import Fisherman from "@assets/pescador.png";
 import "./LeaderBoard.css";
-import { useEffect, useState } from "react";
-import { Subscription } from "rxjs";
 import { leaderboardService } from "@services/leaderBoard.service";
+import { useOfflineSync } from "@/hooks/useOfflineSync";
 
 type Player = {
   rank: number;
@@ -14,27 +13,7 @@ type Player = {
 };
 
 const LeaderBoardComponent = () => {
-  const [players, setPlayers] = useState<Player[]>([]);
-
-  useEffect(() => {
-    const hasInternet = navigator.onLine;
-
-    if (!hasInternet) {
-      const savedPlayers = localStorage.getItem('players');
-      if (savedPlayers) {
-        setPlayers(JSON.parse(savedPlayers)); 
-      }
-    } else {
-      const sub: Subscription = leaderboardService.subscribe((newPlayers) => {
-        setPlayers(newPlayers); 
-        localStorage.setItem('players', JSON.stringify(newPlayers)); 
-      });
-
-      return () => {
-        sub.unsubscribe();
-      };
-    }
-  }, []);
+  const players = useOfflineSync<Player>("players", leaderboardService);
 
   return (
     <div className="leaderboard">
