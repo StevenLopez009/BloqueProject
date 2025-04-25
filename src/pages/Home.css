@@ -1,0 +1,6 @@
+.home {
+  min-height: 100vh;
+  width: 100%;
+  background-image: url("../assets/fondo.webp");
+  background-size: cover;
+}
