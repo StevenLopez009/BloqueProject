@@ -136,6 +136,10 @@
   .leaderboard__table tbody td:nth-child(5)::before {
     content: "Gold: ";
   }
+
+  .img-fisherman {
+    display: none;
+  }
 }
 
 .img-fish {
