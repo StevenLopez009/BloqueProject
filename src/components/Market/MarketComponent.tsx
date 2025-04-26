@@ -24,7 +24,6 @@ const MarketComponent: React.FC = () => {
       <Link to={"/"}>
         <button className="market__button">BACK</button>
       </Link>
-      
       <div className="market__images">
         <img src={fishingRod} alt="Fishing Rod" className="market__image" />
         <img src={poison1} alt="Poison 1" className="market__image" />
@@ -32,7 +31,7 @@ const MarketComponent: React.FC = () => {
         <img src={poison3} alt="Poison 3" className="market__image" />
         <img src={poison4} alt="Poison 4" className="market__image" />
       </div>
-      <div className="market__list">
+      <div className="market__list"> 
         {products.map((product) => (
           <div key={product.id} className="market__item">
             <h2 className="market__name">{product.name}</h2>
@@ -42,7 +41,6 @@ const MarketComponent: React.FC = () => {
           </div>
         ))}
       </div>
-
   </div>  
   );
 };

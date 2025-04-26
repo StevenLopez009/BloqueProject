@@ -115,21 +115,4 @@ button:hover {
   /* Cambia el color cuando pasa el mouse */
 }
 
-@media (max-width: 600px) {
-  .market__list {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: auto auto auto;
-    gap: 0.5rem;
-    padding: 0 1rem;
-    justify-items: center;
-  }
-
-  .market__item {
-    width: 100%;
-  }
-
-  .market__item:nth-child(5) {
-    grid-column: span 2;
-  }
-}
+@media (max-width: 600px) {}
