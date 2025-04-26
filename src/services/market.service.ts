@@ -4,7 +4,7 @@ import { map } from "rxjs/operators";
 
 export const marketService = interval(5000).pipe(
   switchMap(() =>
-    fromFetch("http://api-game.bloque.app/game/market").pipe(
+    fromFetch("https://api-game.bloque.app/game/market").pipe(
       switchMap(response => response.json()),
       map(data => data.items)
     )
