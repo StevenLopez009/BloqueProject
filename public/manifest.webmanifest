@@ -1,0 +1,21 @@
+{
+  "name": "GameFish",
+  "short_name": "GameFish",
+  "description": "leaderboard and market for GameFish",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#fcbf49",
+  "theme_color": "#fcbf49",
+  "icons": [
+    {
+      "src": "icons/icon.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icons/icon.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

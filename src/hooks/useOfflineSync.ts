@@ -8,6 +8,10 @@ export function useOfflineSync<T>(
   const [data, setData] = useState<T[]>([]);
 
   useEffect(() => {
+    const saved = localStorage.getItem(key);
+    if (saved) {
+      setData(JSON.parse(saved));
+    }
     const hasInternet = navigator.onLine;
 
     if (!hasInternet) {

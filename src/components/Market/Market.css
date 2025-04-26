@@ -1,118 +1,91 @@
 .market {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  z-index: 100;
-  height: 100vh;
   background-image: url("../../assets/fondo2.jpg");
-  background-size: contain;
-  background-color: rgba(0, 0, 0, 0.26);
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
 }
 
 .market::before {
   content: "";
   position: absolute;
-  top: 0;
+  bottom: 0;
   left: 0;
   width: 100%;
-  height: 60%;
-  background-color: rgba(0, 0, 0, 0.74);
+  height: 100%;
+  background-image: linear-gradient(to top, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
   z-index: 1;
 }
 
-.market__button {
-  position: absolute;
-  top: 2rem;
-  left: 3rem;
-  background-color: #f57c00;
-  color: white;
-  z-index: 3;
-}
-
-.market__images {
-  display: flex;
-  justify-content: space-evenly;
-  align-items: end;
-  height: 60vh;
-}
-
-.market__images img {
-  width: 18%;
-  height: 250px;
-  object-fit: contain;
-  box-sizing: border-box;
-  z-index: 2;
-}
-
 .market__list {
-  display: flex;
-  justify-content: space-evenly;
-  align-items: start;
-  height: 40%;
-  position: absolute;
-  bottom: 0;
   width: 100%;
-  background-color: #000;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  padding: 20px;
+  z-index: 2;
+  position: relative;
 }
 
-.market__item {
-  width: 18%;
-  height: 70%;
-  padding: 1rem;
-  box-sizing: border-box;
-  text-align: center;
-  background-color: rgb(207, 206, 206);
-  border-radius: 10px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+.market__card {
+  width: 16%;
+  min-width: 250px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 16px;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  z-index: 4;
+  align-items: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.market__item:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.3);
+.market__card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0px 12px 28px rgba(0, 0, 0, 0.4);
 }
 
-.market__name {
-  font-size: 1.2rem;
-  font-weight: bold;
-  margin-bottom: 0.5rem;
-  color: #333;
+.market__card img {
+  width: 100%;
+  height: 300px;
+  object-fit: contain;
 }
 
-.market__type,
-.market__description,
-.market__cost {
-  font-size: 1rem;
-  color: #555;
-  margin-bottom: 0.5rem;
-}
-
-.market__cost {
-  font-weight: bold;
-  font-size: 1.2rem;
+.market__info {
+  width: 100%;
+  height: 200px;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 12px;
+  padding: 16px;
+  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
   color: #000;
+  text-align: center;
 }
 
-button {
-  background-color: #f57c00;
-  color: white;
+.market__info button {
+  background-color: aqua;
+  color: #000;
   border: none;
-  padding: 0.5rem 1rem;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  font-size: 1rem;
-  margin-top: 1rem;
+  border-radius: 8px;
+  padding: 8px 16px;
 }
 
-button:hover {
-  background-color: #ff9800;
-  /* Cambia el color cuando pasa el mouse */
+@media (max-width: 768px) {
+  .market__card {
+    width: 40%;
+  }
 }
 
-@media (max-width: 600px) {}
+@media (max-width: 480px) {
+  .market__card {
+    width: 80%;
+  }
+}
