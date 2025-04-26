@@ -60,7 +60,6 @@ const LeaderBoardComponent = () => {
         </tbody>
       </table>
 
-      {/* Controles de paginación */}
       {totalPages > 1 && (
         <div className="leaderboard__pagination">
           <button onClick={handlePrevPage} disabled={currentPage === 1}>
@@ -72,7 +71,6 @@ const LeaderBoardComponent = () => {
           </button>
         </div>
       )}
-
       <img src={Fisherman} alt="Fisherman" className="img-fisherman" />
     </div>
   );

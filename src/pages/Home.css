@@ -9,5 +9,28 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 1rem;
+}
+
+.home__buttons button {
+  background: linear-gradient(135deg, #00f2fe, #4facfe);
+  border: none;
+  width: 120px;
+  height: 35px;
+  border-radius: 8px;
+  color: white;
+  font-weight: bold;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+}
+
+.home__buttons button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.35);
+}
+
+.home__buttons button:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
 }
