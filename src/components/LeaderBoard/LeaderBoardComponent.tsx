@@ -4,14 +4,9 @@ import "./LeaderBoard.css";
 import { leaderboardService } from "@services/leaderBoard.service";
 import { useOfflineSync } from "@/hooks/useOfflineSync";
 import { useEffect, useState } from "react";
-
-type Player = {
-  rank: number;
-  username: string;
-  level: number;
-  xp: number;
-  gold: number;
-};
+import LeaderBoardTable from "./components/LeaderBoardTable";
+import { Player } from "@/models/Players";
+import Pagination from "./components/Pagination";
 
 const LeaderBoardComponent = () => {
   const players = useOfflineSync<Player>("players", leaderboardService);
@@ -47,41 +42,17 @@ const LeaderBoardComponent = () => {
       ) : (
       <>
         <img src={fish} alt="Pez" className="img-fish" />
-        <table className="leaderboard__table">
-          <thead className="leaderboard__head">
-            <tr className="leaderboard__row">
-              <th className="leaderboard__header">Rank</th>
-              <th className="leaderboard__header">Username</th>
-              <th className="leaderboard__header">Level</th>
-              <th className="leaderboard__header">XP</th>
-              <th className="leaderboard__header">Gold</th>
-            </tr>
-          </thead>
-          <tbody className="leaderboard__body">
-            {currentPlayers.map((player) => (
-              <tr key={player.rank} className="leaderboard__row">
-                <td className="leaderboard__cell">{player.rank}</td>
-                <td className="leaderboard__cell">{player.username}</td>
-                <td className="leaderboard__cell">{player.level}</td>
-                <td className="leaderboard__cell">{player.xp}</td>
-                <td className="leaderboard__cell">{player.gold}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+        <LeaderBoardTable players={currentPlayers} />
       </>
       )}
 
       {totalPages > 1 && (
-        <div className="leaderboard__pagination">
-          <button onClick={handlePrevPage} disabled={currentPage === 1}>
-            Prev
-          </button>
-          <span>Page {currentPage} of {totalPages}</span>
-          <button onClick={handleNextPage} disabled={currentPage === totalPages}>
-            Next
-          </button>
-        </div>
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPrev={handlePrevPage}
+          onNext={handleNextPage}
+      />
       )}
       <img src={Fisherman} alt="Fisherman" className="img-fisherman" />
     </div>
