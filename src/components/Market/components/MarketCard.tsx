@@ -1,5 +1,4 @@
 import { Item } from '@/models/Item';
-import React from 'react';
 
 type Props = {
   product:Item;
