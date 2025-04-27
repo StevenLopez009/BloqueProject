@@ -153,5 +153,6 @@
 
   .market__list {
     gap: 60px;
+    margin-top: 0px;
   }
 }
