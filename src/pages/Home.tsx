@@ -1,16 +1,27 @@
-import { Link } from 'react-router-dom';
-import LeaderBoardComponent from '@components/LeaderBoard/LeaderBoardComponent';
-import "./Home.css"
+import { useState } from 'react';
+import Navigation from '@/components/Navigation/Navigation';
+import LeaderBoard from '@/components/LeaderBoard/LeaderBoard';
+import Market from '@/components/Market/Market';
+import './Home.css';
 
-const Home: React.FC = () => {
+const Home = () => {
+  const [currentView, setCurrentView] = useState<'market' | 'leaderboard'>('market');
+
+  const handleViewChange = (view: string) => {
+    setCurrentView(view as 'market' | 'leaderboard');
+  };
+
   return (
-    <div className='home'>
-      <LeaderBoardComponent/>
-      <div className='home__buttons'>
-        <Link to="/market" >
-          <button>MARKET</button>
-        </Link>
-      </div>
+    <div className="home">
+      <Navigation onViewChange={handleViewChange} />
+      
+      <main className="home__content">
+        {currentView === 'market' ? (
+          <Market />
+        ) : (
+          <LeaderBoard />
+        )}
+      </main>
     </div>
   );
 };

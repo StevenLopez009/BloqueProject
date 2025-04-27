@@ -8,7 +8,7 @@ import LeaderBoardTable from "./components/LeaderBoardTable";
 import { Player } from "@/models/Players";
 import Pagination from "./components/Pagination";
 
-const LeaderBoardComponent = () => {
+const LeaderBoard: React.FC = () => {
   const players = useOfflineSync<Player>("players", leaderboardService);
   const [currentPage, setCurrentPage] = useState(1);
   const [isLoading, setIsLoading] = useState(true);
@@ -35,29 +35,39 @@ const LeaderBoardComponent = () => {
   };
 
   return (
-    <div className="leaderboard">
-      <h1 className="leaderboard__title">Leaderboard</h1>
-      {isLoading ? (
-        <p className="leaderboard__loading">Loading leaderboard...</p>
-      ) : (
-      <>
-        <img src={fish} alt="Pez" className="img-fish" />
-        <LeaderBoardTable players={currentPlayers} />
-      </>
-      )}
+    <section className="leaderboard" aria-label="Leaderboard">
+      <header className="leaderboard__header">
+        <h2 className="leaderboard__title">Fisherman's Hall of Fame</h2>
+      </header>
 
-      {totalPages > 1 && (
-        <Pagination
-          currentPage={currentPage}
-          totalPages={totalPages}
-          onPrev={handlePrevPage}
-          onNext={handleNextPage}
-      />
-      )}
-      <img src={Fisherman} alt="Fisherman" className="img-fisherman" />
-    </div>
+      <main className="leaderboard__content">
+        {isLoading ? (
+          <div className="leaderboard__loading-container" role="status">
+            <div className="leaderboard__loading">
+              <div className="leaderboard__loading-icon">🎣</div>
+              <p>Casting lines to catch the leaderboard data...</p>
+            </div>
+          </div>
+        ) : (
+          <>            
+            <LeaderBoardTable players={currentPlayers} />
+            
+            {totalPages > 1 && (
+              <nav className="leaderboard__pagination" aria-label="Leaderboard pagination">
+                <Pagination
+                  currentPage={currentPage}
+                  totalPages={totalPages}
+                  onPrev={handlePrevPage}
+                  onNext={handleNextPage}
+                />
+              </nav>
+            )}
+          </>
+        )}
+      </main>
+    </section>
   );
 };
 
-export default LeaderBoardComponent;
+export default LeaderBoard; 
 
