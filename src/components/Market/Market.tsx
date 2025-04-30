@@ -6,6 +6,7 @@ import poison1 from "@/assets/poison1.png";
 import poison2 from "@/assets/poison2.png";
 import poison3 from "@/assets/poison3.png";
 import poison4 from "@/assets/poison4.png";
+import poison5 from "@/assets/poison5.png";
 import { Item  } from "@/models/Item";
 import MarketCard from "./components/MarketCard";
 import { useEffect, useState } from "react";
@@ -20,7 +21,7 @@ const Market: React.FC = () => {
     }
   }, [products]);
 
-  const images = [fishingRod, poison1, poison2, poison3, poison4];
+  const images = [fishingRod, poison1, poison2, poison3, poison4, poison5];
 
   return (
     <div className="market">
